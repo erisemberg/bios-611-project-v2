@@ -84,7 +84,7 @@ geno <- geno[which((geno$num_ref/num_F2s) <= 0.99),]
 geno <- geno[which((geno$num_H/num_F2s) <= 0.97),]
 
 # Plot x = ref/(ref+alt) and y = het/(ref+alt+het)
-png("marker_qc_plot.png")
+png("figures/marker_qc_plot.png")
 plot(x=geno$het_all, y=geno$ref_alt, main="Autosome/X markers", 
      ylab="Ref/(Ref + Alt)", xlab="Het/(Het + Ref + Alt)")
 dev.off()
