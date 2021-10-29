@@ -55,6 +55,6 @@ To produce a genome scan, which is a plot showing the results of the QTL analysi
 make figures/temp_aac_genome_scan.png
 ``` 
 
-Logs for each step will be saved to the logs/ folder. 
+Logs for each step will be saved to the `logs/` folder. 
 
 To start an RStudio server at any point, go to `http://localhost:8787/` and login with user `rstudio` and password `pw123`. 
