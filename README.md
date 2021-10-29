@@ -20,7 +20,7 @@ To run the docker container and open a terminal session within the container:
 docker run -e PASSWORD=pw123 --rm -v $(pwd):/home/rstudio/work -p 8787:8787 -it pnut /bin/bash
 ```
 
-First, navigate to the working directory.
+Navigate to the working directory:
 
 ```
 cd home/rstudio/work
