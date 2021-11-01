@@ -22,6 +22,7 @@ source("utils.R")
 
 ensure_directory("logs")
 ensure_directory("derived_data")
+ensure_directory("figures")
 log <- make_logger("logs/file_processing_notes.md")
 
 #---------------------------------Parameters-----------------------------------#
