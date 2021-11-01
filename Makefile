@@ -1,11 +1,12 @@
-PHONY: purge
-PHONY: clean 
+.PHONY: purge
+.PHONY: clean 
 
 purge:
 	rm source_data/*
 	make clean
 
 clean:
+	rm report.pdf report.tex
 	rm derived_data/*
 	rm logs/*
 	rm figures/*
@@ -22,3 +23,6 @@ figures/genetic_map.png figures/temp_aac_genome_scan.png figures/temp_aac_hist.p
  utils.R \
  derived_data/Rqtl_CC27xC3H_BC.csv 
 	Rscript bc_qtl.R
+
+report.pdf: report.Rnw
+	Rscript -e "library(knitr); knit2pdf(\"report.Rnw\")"

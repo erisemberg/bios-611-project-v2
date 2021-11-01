@@ -4,9 +4,7 @@ This is the version of my BIOS 611 project that uses my own thesis data. The shi
 Genetic analyses to determine loci associated with allergic reaction to peanut
 ==============================================================================
 
-This data science project performs genetic association analysis on a data set including genotypes and phenotypes from a backcross between two inbred mouse strains: CC27, which has peanut allergy, and C3H, which does not have peanut allergy. By studying their F2 projeny, we may gain insight into which genetic loci are associated with variation in peanut allergy phenotype. We do this with quantitative trait loci (QTL) analysis.
-
-Phenotype data includes temperature post-peanut exposure and symptom score. 
+This data science project performs genetic association analysis to identify loci associated with peanut allergy in mice. 
 
 To run the code associated with this project, build the docker container like this: 
 

@@ -1,0 +1,15 @@
+\documentclass{article}
+
+\title{Genetic analyses to determine loci associated with allergic reaction to peanut}
+\date{November 17, 2021}
+\author{Ellen Risemberg}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+This data science project performs genetic association analysis on a data set including genotypes and phenotypes from a backcross between two inbred mouse strains: CC27, which has peanut allergy, and C3H, which does not have peanut allergy. By studying their F2 projeny, we may gain insight into which genetic loci are associated with variation in peanut allergy phenotype (measured phenotype is temperature post-peanut exposure - peanut exposure in allergic mice causes hypothermia). We do this with quantitative trait loci (QTL) analysis, where we perform a linear regression at each genotyped marker, looking for a significant linear (additive) relationship between the genotype at that marker and the observed phenotype. 
+
+\end{document}
