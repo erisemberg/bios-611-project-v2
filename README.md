@@ -52,6 +52,7 @@ make figures/temp_aac_transformed_hist.png
 To produce a genome scan, which is a plot showing the results of the QTL analysis (where peaks represent significant associations between genotype and phenotype):
 ```
 make figures/temp_aac_genome_scan.png
+make figures/temp_aac_LR_ex.png
 ``` 
 
 To create the final report:

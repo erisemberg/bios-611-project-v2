@@ -75,7 +75,13 @@ $$c_i \sim N(0, \sigma^2_c) \textrm{ and } b_i \sim N(0, \sigma^2_b)$$
 \\where $y_i$ is the phenotype for individual $i$ and $g_i$ is the genotype at the given marker for individual $i$. \\ \\
 This regression is performed and an LOD score (a measure of significance, like a p-value) is calculated for each marker. These LOD scores are plotted against the genome to identify peaks, where there are loci that have a significant linear relationship between genotype at that locus and phenotype. We might deduce then that a variant in or near that locus affects the phenotype in some way.  \\ \\
 \textbf{Note}: To satisfy the assumption of normally distributed residual variance in linear regression, the phenotype data is transformed using the truncated rank inverse normal transformation (TRINT) before performing QTL analysis. 
-	
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{figures/temp_aac_LR_ex.png}
+	\caption{Linear regression example.}
+	\label{fig:lr}
+\end{figure}
 
 \section{QTL mapping results}
 	

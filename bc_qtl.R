@@ -108,7 +108,15 @@ dev.off()
 # QTL analysis 
 model <- hk(WB02, pheno.col = "Temp_aac")
 
+# permutation tests (loading instead of generating because they take a very long time)
 load("source_data/TaacP.Rdata")
+
+# Linear regression example 
+marker <- rownames(summary(model, threshold = summary(Taac.p)[1]))[1] # UNC17654311
+
+png("figures/temp_aac_LR_ex.png")
+plotPXG(WB02, marker = marker, pheno.col = 'Temp_aac', ylab = "Temperature trajectory decrease")
+dev.off()
 
 png("figures/temp_aac_genome_scan.png")
 plot(model, alternate.chrid = TRUE, ylab = "LOD", main = "Temperature - area above the curve")
