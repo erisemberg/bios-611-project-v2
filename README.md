@@ -43,6 +43,7 @@ make figures/genetic_map.png
 To produce figures summarizing temperature data:
 ```
 make figures/temp_histograms.png
+make figures/temp_time-series_ex.png
 make figures/temp_time-series.png
 make figures/temp_aac_hist.png
 make figures/temp_aac_transformed_hist.png

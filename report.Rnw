@@ -1,5 +1,8 @@
 \documentclass{article}
 
+\usepackage{graphicx}
+\usepackage{float}
+
 \title{Genetic analyses to determine loci associated with allergic reaction to peanut}
 \date{November 17, 2021}
 \author{Ellen Risemberg}
@@ -9,7 +12,86 @@
 \maketitle
 
 \section{Introduction}
+	
+This data science project performs genetic association analysis on a data set including genotypes and phenotypes from a backcross between two inbred mouse strains who differ in their response to peanut (one is allergic, one is not). By studying the progeny from a backcross between the two strains, we can gain insight into which genetic loci are associated with variation in peanut allergy phenotype. We do this with quantitative trait loci (QTL) analysis, where we perform a linear regression at each genotyped marker, looking for a significant linear (additive) relationship between the genotype at that marker and the observed phenotype. \\ \\
 
-This data science project performs genetic association analysis on a data set including genotypes and phenotypes from a backcross between two inbred mouse strains: CC27, which has peanut allergy, and C3H, which does not have peanut allergy. By studying their F2 projeny, we may gain insight into which genetic loci are associated with variation in peanut allergy phenotype (measured phenotype is temperature post-peanut exposure - peanut exposure in allergic mice causes hypothermia). We do this with quantitative trait loci (QTL) analysis, where we perform a linear regression at each genotyped marker, looking for a significant linear (additive) relationship between the genotype at that marker and the observed phenotype. 
+\textbf{Goal}: Identify genetic basis of peanut allergy.
 
+
+\section{Experimental data}
+	
+We performed a backcross between two inbred mouse strains (\textbf{Fig 1}). The parental strains were CC27, which exhibits an allergic reaction to peanut, and C3H, which does not exhibit an allergic reaction to peanut. $\textrm{F}_1$ progeny from the CC27 x C3H cross were backcrossed with CC27 mice to produce a "BC" population, all of whom are either homozygous for the CC27 genotype or heterozygous at each genetic marker. 
+	
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{report_images/bc.png}
+	\caption{Schematic of backcross (Broman \& Sen, 2009).}
+	\label{fig:bc}
+\end{figure} 
+
+The 365 mice in the BC population were exposed to peanut via peritoneal injection and observed for 1 hour post-exposure. We measured temperature at 15 minute intervals post-peanut exposure (a measure of allergic reaction, since allergic reaction causes hypothermia). Here, I focus on a summary statistic of the temperature trajectory as our phenotype of interest, calculated with an "area under the curve" approach (\textbf{Fig 2}). 
+	
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{figures/temp_time-series_ex.png}
+	\caption{Example of time-series temperature data for one BC mouse.}
+	\label{fig:temp_ex}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{figures/temp_aac_hist.png}
+	\caption{Distribution of summary statistic calculated from time-series temperature data.}
+	\label{fig:temp_hist}
+\end{figure}
+	
+	
+\section{Genotype and phenotype data pre-processing}
+	
+Before performing QTL analyses, the raw genotype and phenotype data must be filtered and processed into one spreadsheet. This is done with the \texttt{bc\_file\_proc.R} script, by typing \texttt{make derived\_data/Rqtl\_CC27xC2H\_BC.csv}. \\ \\
+First, genetic markers (each representing a single nucleotide polymorphism, or SNP) are filtered to those that are "informative". Informative genetic markers must meet the following criteria: \\
+\begin{enumerate}
+	\item Low failure rate (less than 5\% N calls)
+	\item Genotype is different in CC027 vs C3H (indicating that phenotypic variation in parent strains could be genetically driven)
+	\item Parents are each inbred (homozygous) at the given marker
+\end{enumerate}
+After filtering for informative markers (shown in \textbf{Fig 4})), genotypes coded as A/T/C/G were re-coded to AA/AB, where A = CC27 genotype and B = C3H genotype, for QTL analysis. \\ \\
+Criteria \#2 and \#3 together mean that the $\textrm{F}_1$ mice will be heterozygous, and after crossing back to CC027, the BC mice will have a roughly 1:1 ratio of AA to AB genotypes at each marker. This will maximize power for identifying a linear phenotypic relationship between genotype groups. 
+	
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{figures/genetic_map.png}
+	\caption{Chromosomal map of informative genetic markers.}
+	\label{fig:map}
+\end{figure}
+
+
+\section{Statistical model}
+	
+QTL mapping involves a linear regression at each genetic marker, where the outcome variable is the phenotype of interest and the predictor variables include genotype and covariates such as cage and batch. I use a linear mixed model where genotype is modeled as a fixed effect and cage and batch are modeled as random effects. 
+	
+$$y_i = \mu + g_i\beta + c_i + b_i + \epsilon$$
+$$c_i \sim N(0, \sigma^2_c) \textrm{ and } b_i \sim N(0, \sigma^2_b)$$
+\\where $y_i$ is the phenotype for individual $i$ and $g_i$ is the genotype at the given marker for individual $i$. \\ \\
+This regression is performed and an LOD score (a measure of significance, like a p-value) is calculated for each marker. These LOD scores are plotted against the genome to identify peaks, where there are loci that have a significant linear relationship between genotype at that locus and phenotype. We might deduce then that a variant in or near that locus affects the phenotype in some way.  \\ \\
+\textbf{Note}: To satisfy the assumption of normally distributed residual variance in linear regression, the phenotype data is transformed using the truncated rank inverse normal transformation (TRINT) before performing QTL analysis. 
+	
+
+\section{QTL mapping results}
+	
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{figures/temp_aac_genome_scan.png}
+	\caption{Result of QTL mapping.}
+	\label{fig:scan}
+\end{figure}
+	
+The solid line represents the 5\% significance threshold and the dashed line represents the 10\% significance threshold (determined by permutation test). We have a few suggestive QTLs, namely on chromosomes 10 and 17, to further analyze. \\ \\
+Further analysis may include: 
+\begin{itemize}
+	\item Multi-QTL modeling: does a linear model with two QTL fit better than a linear model with one QTL?
+	\item Candidate gene analysis: which mutations does CC27 have in these regions that may impart increased susceptibility to peanut allergy? Are there genes that are differentially expressed in CC27 in organs relevant to peanut allergy that may be playing a role?
+	\item QTL analysis of other phenotypes: symptom score, other temperature-related phenotypes 
+\end{itemize}
+	
 \end{document}

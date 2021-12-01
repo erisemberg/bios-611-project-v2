@@ -1,0 +1,19 @@
+obj,perm.obj,type,colname,name,abbr
+T00,T00.p,normal,Temp_0min,Temperature at 0 min,Temp at 0 min
+T15,T15.p,normal,Temp_15min,Temperature at 15 min,Temp at 15 min
+T30,T30.p,normal,Temp_30min,Temperature at 30 min,Temp at 30 min
+T45,T45.p,normal,Temp_45min,Temperature at 45 min,Temp at 45 min
+T60,T60.p,normal,Temp_60min,Temperature at 60 min,Temp at 60 min
+D15,D15.p,normal,Delta_15min,Change in temperature: 0-15 min,Change in temp: 0-15 min
+D30,D30.p,normal,Delta_30min,Change in temperature: 15-30 min,Change in temp: 15-30 min
+D45,D45.p,normal,Delta_45min,Change in temperature: 30-45 min,Change in temp: 30-45 min
+D60,D60.p,normal,Delta_60min,Change in temperature: 45-60 min,Change in temp: 45-60 min
+minTemp,MinTemp.p,normal,Min_Temp,Minimum temperature,Min temp
+minTempTime,MinTempTime.p,np,Min_Temp_Time,Time of minimum temperature,Time of min temp
+sympScore,SympScore.p,np,Symptom_score,Symptom score,Symptom score
+sympBin,SympBin.p,binary,Symptom_bin,Symptom score (binary),Symptom score (binary)
+diarrhea,Diarhhea.p,binary,Diarrhea_bin,Diarrhea (binary),Diarrhea (binary)
+Taac,Taac.p,normal,Temp_aac,Temperature - area under the curve,Temp - AUC
+Tavg15to60,Tavg15to60.p,normal,Temp_avg15to60,Average temperature: 15-60 min,Avg temp: 15-60 min
+Tavg30to60,Tavg30to60.p,normal,Temp_avg30to60,Average temperature: 30-60 min,Avg temp: 30-60 min
+Tavg45to60,Tavg45to60.p,normal,Temp_avg45to60,Average temperature: 45-60 min,Avg temp: 45-60 min

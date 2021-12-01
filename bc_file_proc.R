@@ -11,6 +11,8 @@
 #       Example (SARS data): 1-marker name; 2-chr; 3-pos; 4-ref; 5-alt; 6-cc_reliable; 
 #       7-cc_sdp; 8 to 23-parent genotypes; 24 to 27-F1 genotypes (female); 
 #       28 to 29-F1 genotypes (male); 30 to 819: genotype data
+#       ### column names (mouse IDs) MUST match Geno_ID in phenotype file - verify
+#       that UNC IDs are padded in mouse IDs from miniMUGA
 #   Phenotype file - each row is an F2 mouse, each column is a phenotype. Must 
 #       have a "Geno_ID" column in the format "Cr_RB05_<sex>_<padded UNC ID>"
 #
